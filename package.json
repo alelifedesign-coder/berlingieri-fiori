@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pdfjs-dist": "^6.4.299",
+    "puppeteer": "^25.16.0"
+  }
+}

@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Gestione Catalogo | Berlingieri Fiori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pine: #1a5c3a;
+      --pine-dark: #103b25;
+      --wine: #c0392b;
+      --wine-dark: #96281b;
+      --gold: #d4ac57;
+      --bg: #f4f7f5;
+      --surface: #ffffff;
+      --border: #dbe4dd;
+      --text: #1d2d24;
+      --muted: #5e7568;
+      --shadow-sm: 0 2px 8px rgba(18, 54, 34, 0.05);
+      --shadow-md: 0 8px 24px rgba(18, 54, 34, 0.08);
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Bar */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+    .dashboard-badge {
+      background: #e8f5ec;
+      color: var(--pine);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid #c2e2cc;
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .15s ease;
+    }
+    .btn-primary {
+      background: var(--pine);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--pine-dark);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover {
+      background: #edf3ef;
+    }
+    .btn-danger {
+      background: #fde8e6;
+      color: var(--wine);
+      border-color: #f8c8c4;
+    }
+    .btn-danger:hover {
+      background: var(--wine);
+      color: #fff;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      max-width: 1400px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 24px 60px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* KPI / Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: #eaf5ee;
+      color: var(--pine);
+    }
+    .stat-meta h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-meta .val {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Split Workspace */
+    .workspace {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 1080px) {
+      .workspace { grid-template-columns: 1fr; }
+    }
+
+    /* Card Box */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #fafcfb;
+    }
+    .card-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* Search & Filter Bar */
+    .table-toolbar {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 0 16px 0 38px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+    }
+    .search-box input:focus {
+      border-color: var(--pine);
+      box-shadow: 0 0 0 3px rgba(26, 92, 58, 0.15);
+    }
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .cat-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .pill.active {
+      background: var(--pine);
+      border-color: var(--pine);
+      color: #fff;
+    }
+
+    /* Product Table */
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      padding: 12px 20px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      font-weight: 700;
+      background: #f7faf8;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr.selected td {
+      background: #f0f7f2;
+    }
+    tr:hover td {
+      background: #fbfdfc;
+      cursor: pointer;
+    }
+
+    .prod-cell {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .prod-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: #e8f3ec;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid #d4e4d8;
+    }
+    .prod-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .prod-info strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .prod-info span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      max-width: 280px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .badge-available { background: #e0f4e6; color: #156936; }
+    .badge-limited { background: #fdf5d8; color: #8f6517; }
+    .badge-sold { background: #fae1e0; color: #9c2522; }
+
+    /* Actions in table */
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all .15s;
+    }
+    .btn-icon:hover {
+      color: var(--pine);
+      border-color: var(--pine);
+    }
+    .btn-icon.del:hover {
+      color: var(--wine);
+      border-color: var(--wine);
+      background: #fdf1f0;
+    }
+
+    /* Editor Form Sidebar */
+    .editor-card {
+      position: sticky;
+      top: 96px;
+    }
+    .editor-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .field-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      border-color: var(--pine);
+      box-shadow: 0 0 0 3px rgba(26, 92, 58, 0.15);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Photo Upload Area */
+    .upload-box {
+      border: 2px dashed #c0d4c6;
+      background: #f7fbf8;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all .15s;
+    }
+    .upload-box:hover {
+      border-color: var(--pine);
+      background: #eff7f1;
+    }
+    .upload-box input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .preview-thumb {
+      max-height: 120px;
+      margin: 8px auto;
+      border-radius: 8px;
+      display: none;
+      object-fit: contain;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--pine-dark);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all .25s ease;
+      z-index: 100;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Login Gate */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, #1a5c3a 0%, #0d281a 100%);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .login-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 36px 32px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+    }
+    .login-box img {
+      height: 52px;
+      margin-bottom: 16px;
+      object-fit: contain;
+    }
+    .login-box h3 {
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      color: var(--pine-dark);
+      margin-bottom: 6px;
+    }
+    .login-box p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 14px;
+      text-align: center;
+      letter-spacing: .08em;
+    }
+    .login-box input:focus {
+      border-color: var(--pine);
+      box-shadow: 0 0 0 3px rgba(26, 92, 58, 0.15);
+    }
+    .login-err {
+      color: var(--wine);
+      font-size: 12px;
+      font-weight: 700;
+      min-height: 18px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Gate Overlay -->
+  <div class="login-overlay" id="loginGate">
+    <div class="login-box">
+      <img src="berlingieri_logo.png" alt="Berlingieri Fiori">
+      <h3>Area Riservata</h3>
+      <p>Inserisci la password di amministrazione per gestire il catalogo.</p>
+      <form onsubmit="handleLogin(event)">
+        <input type="password" id="adminPwd" placeholder="Password di accesso" autofocus required>
+        <div class="login-err" id="loginErr"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:12px;">
+          Accedi al Pannello
+        </button>
+      </form>
+      <a href="index.html" style="display:inline-block; margin-top:16px; font-size:12px; color:var(--muted); text-decoration:none;">
+        ← Torna al sito
+      </a>
+    </div>
+  </div>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-section">
+        <img src="berlingieri_logo.png" alt="Berlingieri Fiori" class="brand-logo">
+        <span class="dashboard-badge">🎄 Dashboard Catalogo</span>
+      </div>
+      <div class="topbar-actions">
+        <a href="index.html" target="_blank" class="btn btn-secondary">
+          👁️ Vedi Negozio
+        </a>
+        <button class="btn btn-primary" onclick="initNewProduct()">
+          + Nuovo Articolo
+        </button>
+        <button class="btn btn-secondary" onclick="handleLogout()" title="Esci dalla sessione" style="padding:10px 14px;">
+          🔒 Esci
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Wrap -->
+  <main class="main-wrap">
+
+    <!-- KPI / Quick Stats -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-meta">
+          <h4>Articoli Totali</h4>
+          <div class="val" id="kpiTotal">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#eaf8ef; color:#18733b;">✅</div>
+        <div class="stat-meta">
+          <h4>Disponibili</h4>
+          <div class="val" id="kpiAvail">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fef7e6; color:#9c7014;">⏳</div>
+        <div class="stat-meta">
+          <h4>Ultimi Pezzi</h4>
+          <div class="val" id="kpiLimited">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fae8e8; color:#a62b28;">🛑</div>
+        <div class="stat-meta">
+          <h4>Esauriti</h4>
+          <div class="val" id="kpiSold">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace: Product Table (Left) + Form Editor (Right) -->
+    <div class="workspace">
+      
+      <!-- Table Card -->
+      <section class="card">
+        <div class="card-header">
+          <h2>Lista Articoli</h2>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" style="padding:6px 14px; font-size:12px;" onclick="exportJSON()">
+              📥 Backup JSON
+            </button>
+            <label class="btn btn-secondary" style="padding:6px 14px; font-size:12px; cursor:pointer;">
+              📤 Ripristina
+              <input type="file" accept=".json" onchange="importJSON(this)" style="display:none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="dashSearch" placeholder="Cerca per nome o descrizione…" oninput="renderTable()">
+          </div>
+          <div class="cat-pills" id="catPills">
+            <button class="pill active" data-cat="tutti" onclick="selectCat(this)">Tutti</button>
+            <button class="pill" data-cat="Ghirlande" onclick="selectCat(this)">Ghirlande</button>
+            <button class="pill" data-cat="Centrotavola" onclick="selectCat(this)">Centrotavola</button>
+            <button class="pill" data-cat="Bouquet" onclick="selectCat(this)">Bouquet</button>
+            <button class="pill" data-cat="Alberi" onclick="selectCat(this)">Alberi &amp; Rami</button>
+            <button class="pill" data-cat="Composizioni" onclick="selectCat(this)">Composizioni</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Articolo</th>
+                <th>Categoria</th>
+                <th>Prezzo</th>
+                <th>Stato</th>
+                <th style="text-align:right;">Azioni</th>
+              </tr>
+            </thead>
+            <tbody id="dashTableBody">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
+          <div id="dashEmpty" class="empty-state" style="display:none;">
+            <span>🍃</span>
+            Nessun articolo trovato con questi criteri.
+          </div>
+        </div>
+      </section>
+
+      <!-- Editor Card -->
+      <aside class="card editor-card">
+        <div class="card-header">
+          <h2 id="formHeading">✨ Nuovo Articolo</h2>
+          <span style="font-size:11px; color:var(--muted); font-weight:600;" id="editIdBadge">ID: Auto</span>
+        </div>
+
+        <form class="editor-body" onsubmit="handleSave(event)">
+          <div class="field-group">
+            <label>Nome Articolo *</label>
+            <input type="text" id="fName" placeholder="Es. Ghirlanda Reale con Pigne" required>
+          </div>
+
+          <div class="grid-2">
+            <div class="field-group">
+              <label>Categoria</label>
+              <select id="fCat">
+                <option value="Ghirlande">Ghirlande</option>
+                <option value="Centrotavola">Centrotavola</option>
+                <option value="Bouquet">Bouquet</option>
+                <option value="Alberi">Alberi &amp; Rami</option>
+                <option value="Composizioni">Composizioni</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Prezzo (es: € 45)</label>
+              <input type="text" id="fPrice" placeholder="€ 00">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field-group">
+              <label>Stato Disponibilità</label>
+              <select id="fStatus">
+                <option value="available">🟢 Disponibile</option>
+                <option value="limited">🟡 Ultimi pezzi</option>
+                <option value="sold">🔴 Esaurito</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Icona Emoji</label>
+              <input type="text" id="fEmoji" placeholder="🎄" maxlength="4">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Descrizione Dettagliata</label>
+            <textarea id="fDesc" placeholder="Descrivi materiali, dimensioni (es. ø 40 cm), profumazioni..."></textarea>
+          </div>
+
+          <!-- Foto Prodotto -->
+          <div class="field-group">
+            <label>Fotografia Prodotto</label>
+            <div class="upload-box" id="dropBox">
+              <input type="file" id="fFile" accept="image/*" onchange="handleImagePick(this)">
+              <div id="uploadPrompt">
+                <p style="font-size:24px; margin-bottom:4px;">📷</p>
+                <p style="font-size:12px; font-weight:700; color:var(--pine);">Carica o trascina una foto</p>
+                <p style="font-size:11px; color:var(--muted);">JPG, PNG o WebP (max 4MB)</p>
+              </div>
+              <img id="imgPreview" class="preview-thumb" alt="Anteprima">
+            </div>
+            <button type="button" id="removeImgBtn" class="btn btn-secondary" style="display:none; padding:4px 10px; font-size:11px; margin-top:6px;" onclick="removeImage()">
+              Rimuovi foto
+            </button>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:8px;">
+            <button type="submit" class="btn btn-primary" style="flex:1;">
+              💾 Salva Modifiche
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="initNewProduct()">
+              Annulla
+            </button>
+          </div>
+        </form>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span>✅</span>
+    <span id="toastMsg">Operazione completata con successo</span>
+  </div>
+
+  <script>
+    // ── Local Storage Key sincronizzata con index.html ──
+    const STORAGE_KEY = "bf_products_2026";
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 1, name: "Ghirlanda Classica Rossa", cat: "Ghirlande",
+        desc: "Ghirlanda in pino fresco con bacche rosse, pigne dorate e nastro in velluto. Diametro ø 40 cm.",
+        price: "€ 45", emoji: "🎄", status: "available", img: null, tone: "tone-1"
+      },
+      {
+        id: 2, name: "Centrotavola Natalizio Gold", cat: "Centrotavola",
+        desc: "Composizione con rami di abete, cinnamomo, stelle di natale bianche e candela profumata.",
+        price: "€ 38", emoji: "🕯️", status: "available", img: null, tone: "tone-3"
+      },
+      {
+        id: 3, name: "Bouquet Rosso & Bianco", cat: "Bouquet",
+        desc: "Bouquet invernale con amarilli rossi, rami di bacche bianche e foglie di agrifoglio. Su ordinazione.",
+        price: "€ 55", emoji: "🌹", status: "available", img: null, tone: "tone-2"
+      },
+      {
+        id: 4, name: "Ghirlanda Moderna Minimal", cat: "Ghirlande",
+        desc: "Ghirlanda boho con cotone essiccato, eucalipto, pigne naturali e fiocco in juta. Ø 35 cm.",
+        price: "€ 40", emoji: "🌿", status: "available", img: null, tone: "tone-1"
+      },
+      {
+        id: 5, name: "Composizione Candela Natale", cat: "Composizioni",
+        desc: "Base in muschio con tre candele avvolte in abete, agrifoglio e rametti di eucalipto.",
+        price: "€ 32", emoji: "🕯️", status: "limited", img: null, tone: "tone-3"
+      },
+      {
+        id: 6, name: "Ramo di Abete Decorato", cat: "Alberi",
+        desc: "Ramo singolo di abete naturale decorato con luci led, palline e nastri. Altezza 80 cm.",
+        price: "€ 28", emoji: "🌲", status: "available", img: null, tone: "tone-1"
+      },
+      {
+        id: 7, name: "Stella di Natale XXL", cat: "Composizioni",
+        desc: "Stella di natale in grande formato (ø 25 cm) avvolta in carta kraft decorata con nastro dorato.",
+        price: "€ 22", emoji: "🌺", status: "available", img: null, tone: "tone-2"
+      },
+      {
+        id: 8, name: "Centrotavola Rustico", cat: "Centrotavola",
+        desc: "Base di tronchetto con muschio, pigne, stelle di anice, cannella e fiori secchi.",
+        price: "€ 35", emoji: "🍂", status: "available", img: null, tone: "tone-3"
+      },
+      {
+        id: 9, name: "Ghirlanda Secca & Profumata", cat: "Ghirlande",
+        desc: "Ghirlanda di fiori secchi, lavanda, anice, cannella e agrumi essiccati. Ø 30 cm.",
+        price: "€ 36", emoji: "🌸", status: "sold", img: null, tone: "tone-2"
+      }
+    ];
+
+    // ── Autenticazione Amministratore ──
+    const AUTH_SESSION_KEY = "bf_admin_auth_2026";
+    // Password predefinita: berlingieri2026 (puoi personalizzarla in qualsiasi momento)
+    const ADMIN_PASSWORD_HASH = "berlingieri2026";
+
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem(AUTH_SESSION_KEY) === "true";
+      const gate = document.getElementById("loginGate");
+      if (isAuth) {
+        gate.style.display = "none";
+        return true;
+      } else {
+        gate.style.display = "flex";
+        setTimeout(() => document.getElementById("adminPwd")?.focus(), 100);
+        return false;
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById("adminPwd").value.trim();
+      const err = document.getElementById("loginErr");
+      if (pwd === ADMIN_PASSWORD_HASH) {
+        sessionStorage.setItem(AUTH_SESSION_KEY, "true");
+        err.textContent = "";
+        document.getElementById("loginGate").style.display = "none";
+        init();
+        showToast("Accesso effettuato!");
+      } else {
+        err.textContent = "Password errata. Riprova.";
+        document.getElementById("adminPwd").value = "";
+        document.getElementById("adminPwd").focus();
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem(AUTH_SESSION_KEY);
+      location.reload();
+    }
+
+    let products = [];
+    let currentEditingId = null;
+    let selectedCategory = "tutti";
+    let pendingImgBase64 = null;
+
+    // Inizializzazione
+    function init() {
+      if (!checkAuth()) return;
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          products = JSON.parse(stored);
+        } catch(e) {
+          products = [...DEFAULT_PRODUCTS];
+        }
+      } else {
+        products = [...DEFAULT_PRODUCTS];
+        persist();
+      }
+      renderStats();
+      renderTable();
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+        renderStats();
+        return true;
+      } catch (err) {
+        console.error("Storage error:", err);
+        alert("⚠️ Errore di salvataggio (Spazio memoria esaurito per le immagini).\n\nConsiglio: prova a ricaricare una foto più leggera o rimuovere foto pesanti da altri articoli.");
+        return false;
+      }
+    }
+
+    // Stats
+    function renderStats() {
+      document.getElementById("kpiTotal").textContent = products.length;
+      document.getElementById("kpiAvail").textContent = products.filter(p => p.status === "available").length;
+      document.getElementById("kpiLimited").textContent = products.filter(p => p.status === "limited").length;
+      document.getElementById("kpiSold").textContent = products.filter(p => p.status === "sold").length;
+    }
+
+    // Filtri
+    function selectCat(btn) {
+      document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      selectedCategory = btn.dataset.cat;
+      renderTable();
+    }
+
+    // Tabella
+    function renderTable() {
+      const tbody = document.getElementById("dashTableBody");
+      const empty = document.getElementById("dashEmpty");
+      const search = (document.getElementById("dashSearch").value || "").toLowerCase().trim();
+
+      const filtered = products.filter(p => {
+        const matchCat = (selectedCategory === "tutti") || (p.cat === selectedCategory);
+        const matchSearch = !search || p.name.toLowerCase().includes(search) || (p.desc && p.desc.toLowerCase().includes(search));
+        return matchCat && matchSearch;
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+      empty.style.display = "none";
+
+      tbody.innerHTML = filtered.map(p => {
+        const isEditing = p.id === currentEditingId;
+        const statusClass = p.status === "sold" ? "badge-sold" : p.status === "limited" ? "badge-limited" : "badge-available";
+        const statusLabel = p.status === "sold" ? "Esaurito" : p.status === "limited" ? "Ultimi pezzi" : "Disponibile";
+        const thumb = p.img 
+          ? `<img src="${p.img}" alt="${p.name}">` 
+          : `<span>${p.emoji || "🌿"}</span>`;
+
+        return `
+          <tr class="${isEditing ? 'selected' : ''}" onclick="selectProduct(${p.id})">
+            <td>
+              <div class="prod-cell">
+                <div class="prod-thumb">${thumb}</div>
+                <div class="prod-info">
+                  <strong>${p.name}</strong>
+                  <span>${p.desc || 'Nessuna descrizione'}</span>
+                </div>
+              </div>
+            </td>
+            <td><strong>${p.cat}</strong></td>
+            <td><strong>${p.price || 'Su richiesta'}</strong></td>
+            <td>
+              <span class="badge ${statusClass}">${statusLabel}</span>
+            </td>
+            <td>
+              <div class="row-actions" onclick="event.stopPropagation()">
+                <button class="btn-icon" title="Modifica" onclick="selectProduct(${p.id})">
+                  ✏️
+                </button>
+                <button class="btn-icon del" title="Elimina" onclick="handleDelete(${p.id})">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    // Selezione / Nuovo Articolo
+    function selectProduct(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      currentEditingId = id;
+      document.getElementById("formHeading").textContent = "✏️ Modifica Articolo";
+      document.getElementById("editIdBadge").textContent = `ID: #${p.id}`;
+
+      document.getElementById("fName").value = p.name || "";
+      document.getElementById("fCat").value = p.cat || "Ghirlande";
+      document.getElementById("fPrice").value = p.price || "";
+      document.getElementById("fStatus").value = p.status || "available";
+      document.getElementById("fEmoji").value = p.emoji || "🌿";
+      document.getElementById("fDesc").value = p.desc || "";
+
+      pendingImgBase64 = p.img || null;
+      updateImgPreviewUI();
+      renderTable();
+    }
+
+    function initNewProduct() {
+      currentEditingId = null;
+      document.getElementById("formHeading").textContent = "✨ Nuovo Articolo";
+      document.getElementById("editIdBadge").textContent = "ID: Auto";
+
+      document.getElementById("fName").value = "";
+      document.getElementById("fCat").value = "Ghirlande";
+      document.getElementById("fPrice").value = "";
+      document.getElementById("fStatus").value = "available";
+      document.getElementById("fEmoji").value = "🎄";
+      document.getElementById("fDesc").value = "";
+
+      pendingImgBase64 = null;
+      document.getElementById("fFile").value = "";
+      updateImgPreviewUI();
+      renderTable();
+    }
+
+    // Compressione automatica immagini via Canvas
+    function compressImage(file, maxDimension = 640, quality = 0.8) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+              if (width > maxDimension) {
+                height = Math.round((height * maxDimension) / width);
+                width = maxDimension;
+              }
+            } else {
+              if (height > maxDimension) {
+                width = Math.round((width * maxDimension) / height);
+                height = maxDimension;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            // Salva in formato JPEG ottimizzato e leggero
+            const compressed = canvas.toDataURL("image/jpeg", quality);
+            resolve(compressed);
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleImagePick(input) {
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        pendingImgBase64 = await compressImage(file, 640, 0.8);
+        updateImgPreviewUI();
+      } catch (err) {
+        console.error("Errore compressione:", err);
+        alert("Impossibile caricare questa immagine. Prova con un altro formato.");
+      }
+    }
+
+    function removeImage() {
+      pendingImgBase64 = null;
+      document.getElementById("fFile").value = "";
+      updateImgPreviewUI();
+    }
+
+    function updateImgPreviewUI() {
+      const preview = document.getElementById("imgPreview");
+      const prompt = document.getElementById("uploadPrompt");
+      const removeBtn = document.getElementById("removeImgBtn");
+
+      if (pendingImgBase64) {
+        preview.src = pendingImgBase64;
+        preview.style.display = "block";
+        prompt.style.display = "none";
+        removeBtn.style.display = "inline-flex";
+      } else {
+        preview.src = "";
+        preview.style.display = "none";
+        prompt.style.display = "block";
+        removeBtn.style.display = "none";
+      }
+    }
+
+    // Salva / Elimina
+    function handleSave(e) {
+      e.preventDefault();
+      const name = document.getElementById("fName").value.trim();
+      if (!name) return;
+
+      const cat = document.getElementById("fCat").value;
+      const price = document.getElementById("fPrice").value.trim();
+      const status = document.getElementById("fStatus").value;
+      const emoji = document.getElementById("fEmoji").value.trim() || "🌿";
+      const desc = document.getElementById("fDesc").value.trim();
+
+      if (currentEditingId !== null) {
+        // Modifica esistente
+        const idx = products.findIndex(x => x.id === currentEditingId);
+        if (idx !== -1) {
+          products[idx] = {
+            ...products[idx],
+            name, cat, price, status, emoji, desc,
+            img: pendingImgBase64
+          };
+          if (persist()) {
+            showToast(`Articolo "${name}" aggiornato!`);
+          }
+        }
+      } else {
+        // Nuovo articolo
+        const maxId = products.reduce((acc, p) => Math.max(acc, p.id || 0), 0);
+        const newProd = {
+          id: maxId + 1,
+          name, cat, price, status, emoji, desc,
+          img: pendingImgBase64,
+          tone: ["tone-1", "tone-2", "tone-3"][Math.floor(Math.random() * 3)]
+        };
+        products.unshift(newProd);
+        if (persist()) {
+          currentEditingId = newProd.id;
+          document.getElementById("formHeading").textContent = "✏️ Modifica Articolo";
+          document.getElementById("editIdBadge").textContent = `ID: #${newProd.id}`;
+          showToast(`Articolo "${name}" creato con successo!`);
+        } else {
+          // Revert if storage failed
+          products.shift();
+        }
+      }
+
+      renderTable();
+    }
+
+    function handleDelete(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      if (!confirm(`Sei sicuro di voler eliminare "${p.name}"?`)) return;
+
+      products = products.filter(x => x.id !== id);
+      if (currentEditingId === id) initNewProduct();
+      persist();
+      renderTable();
+      showToast(`Articolo eliminato.`);
+    }
+
+    // Backup & Restore
+    function exportJSON() {
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `berlingieri_catalogo_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      showToast("Download del catalogo avviato!");
+    }
+
+    function importJSON(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (Array.isArray(parsed)) {
+            products = parsed;
+            persist();
+            initNewProduct();
+            renderTable();
+            showToast("Catalogo ripristinato con successo!");
+          } else {
+            alert("File non valido.");
+          }
+        } catch(err) {
+          alert("Errore nella lettura del file JSON.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Toast
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      document.getElementById("toastMsg").textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2800);
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
