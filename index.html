@@ -1005,8 +1005,9 @@ function sendWhatsApp() {
     window.location.href = url;
   }
 
-  // Azzera il carrello dopo l'invio
+  // Azzera completamente il carrello per la nuova sessione dopo l'invio WhatsApp
   cart = {};
+  localStorage.removeItem("bf_cart_2026");
   saveCart();
   renderProducts();
   updateCartUI();
