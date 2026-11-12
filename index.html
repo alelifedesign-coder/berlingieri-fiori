@@ -9,17 +9,21 @@
   <style>
     /* ── Base & Tokens ── */
     :root{
-      --pine:#1a5c3a;
-      --pine-dark:#123f29;
-      --wine:#c0392b;
-      --gold:#d4ac57;
-      --gold-dark:#8f6f2a;
-      --cream:#f6faf7;
-      --paper:#ffffff;
-      --ink:#1c3828;
-      --muted:#557062;
-      --line:#d8e8dd;
-      --shadow:0 18px 60px rgba(20,80,40,.12)
+      --pine:#0E3B2E;
+      --pine-dark:#08281F;
+      --pine-hover:#062018;
+      --wine:#8F1B1B;
+      --wine-hover:#751313;
+      --gold:#DF9C36;
+      --gold-dark:#936829;
+      --cream:#F7F1E6;
+      --paper:#FFFDF9;
+      --card-bg:#FAF5EB;
+      --card-border:#EBE0CF;
+      --ink:#18221B;
+      --muted:#7A7062;
+      --line:#E2D6C3;
+      --shadow:0 14px 40px rgba(60,45,30,.08)
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -30,16 +34,16 @@
     a{color:inherit;text-decoration:none}
     svg{display:block}
     img{max-width:100%}
-    .container{width:min(1180px,calc(100% - 48px));margin:0 auto}
+    .container{width:min(1240px,calc(100% - 48px));margin:0 auto}
     .eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:800}
     .serif{font-family:Georgia,"Times New Roman",serif}
     .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 
     /* ── Top note ── */
-    .topnote{text-align:center;background:#1a5c3a;color:#f0f7e8;padding:9px 16px;font-size:12px;font-weight:700;letter-spacing:.07em}
+    .topnote{text-align:center;background:var(--pine);color:#f0f7e8;padding:9px 16px;font-size:12px;font-weight:700;letter-spacing:.07em}
 
     /* ── Nav ── */
-    .nav{background:var(--paper);position:relative;z-index:15;border-bottom:1px solid rgba(26,92,58,.1);box-shadow:0 2px 15px rgba(20,70,35,.06)}
+    .nav{background:var(--paper);position:relative;z-index:15;border-bottom:1px solid var(--line);box-shadow:0 2px 15px rgba(40,30,20,.05)}
     .nav-inner{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:8px 0}
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .logo-wrap{height:95px;display:flex;align-items:center}
@@ -74,101 +78,118 @@
 
     /* ── Benefits Strip (Floating Card style) ── */
     .benefits{position:relative;z-index:10;background:transparent;border:0;margin-top:-44px}
-    .benefit-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:1240px;margin:0 auto;width:calc(100% - 48px);background:rgba(255,255,255,.98);border:1px solid rgba(220,235,225,.9);box-shadow:0 14px 40px rgba(16,60,36,.10);border-radius:24px;gap:0;padding:20px 14px;backdrop-filter:blur(10px)}
-    .benefit{gap:14px;padding:6px 20px;justify-content:flex-start;border-right:1px solid #e3ede6;display:flex;align-items:center}
+    .benefit-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:1240px;margin:0 auto;width:calc(100% - 48px);background:rgba(255,253,249,.98);border:1px solid #E5DAC8;box-shadow:0 14px 40px rgba(50,40,25,.07);border-radius:24px;gap:0;padding:20px 14px;backdrop-filter:blur(10px)}
+    .benefit{gap:14px;padding:6px 20px;justify-content:flex-start;border-right:1px solid #EBE0CF;display:flex;align-items:center}
     .benefit:last-child{border-right:0}
-    .benefit-icon{width:52px;height:52px;border:none;background:#eaf5ee;color:var(--pine);font-size:24px;flex:none;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(26,92,58,.12)}
-    .benefit strong{font-size:14px;color:var(--pine-dark);font-weight:750;letter-spacing:-.01em;line-height:1.25}
-    .benefit small{color:#647d6e;display:block;font-size:11.5px;margin-top:3px;line-height:1.35}
+    .benefit-icon{width:52px;height:52px;border:none;background:#F3ECE0;color:var(--pine);font-size:24px;flex:none;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(14,59,46,.12)}
+    .benefit strong{font-size:14px;color:var(--ink);font-weight:750;letter-spacing:-.01em;line-height:1.25}
+    .benefit small{color:#7A7062;display:block;font-size:11.5px;margin-top:3px;line-height:1.35}
 
-    /* ── Catalog section ── */
-    .section{padding:83px 0}
+    /* ── Catalog section (Matches Reference) ── */
+    .section{padding:80px 0}
+    #catalogo{background:var(--cream)}
     .section-header{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}
-    .section-lead .eyebrow{color:#8a6220;margin-bottom:12px}
-    .section h2{font-family:Georgia,serif;font-weight:400;font-size:clamp(32px,3.8vw,48px);letter-spacing:-.05em;line-height:1.1;margin:0}
-    .section-intro{color:var(--muted);font-size:13px;line-height:1.7;max-width:355px}
-    .catalog-controls{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:25px;flex-wrap:wrap}
-    .tabs{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-    .tab{border:1px solid #cdd8d0;border-radius:100px;padding:11px 17px;background:white;color:#557062;font-size:12px;font-weight:800;transition:.15s}
+    .section-lead .eyebrow{color:var(--gold-dark);margin-bottom:12px;font-weight:800;letter-spacing:.18em}
+    .section h2{font-family:Georgia,serif;font-weight:400;font-size:clamp(32px,3.8vw,48px);letter-spacing:-.04em;line-height:1.1;margin:0;color:var(--ink)}
+    .section-intro{color:var(--muted);font-size:14px;line-height:1.7;max-width:380px}
+    .catalog-controls{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px;flex-wrap:wrap}
+    .tabs{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .tab{border:1px solid #DFD5C4;border-radius:100px;padding:11px 18px;background:var(--paper);color:#655A4C;font-size:12px;font-weight:750;transition:.15s}
+    .tab:hover{border-color:var(--pine);color:var(--pine)}
     .tab.active{background:var(--pine);border-color:var(--pine);color:#fff}
-    .search{display:flex;align-items:center;gap:9px;border:1px solid #cdd8d0;border-radius:100px;padding:0 17px;height:42px;background:#fff;min-width:240px;color:#7a9982}
-    .search input{width:100%;border:0;outline:0;background:transparent;color:var(--pine);font-size:12px}
-    .search input::placeholder{color:#9aada2}
+    .search{display:flex;align-items:center;gap:9px;border:1px solid #DFD5C4;border-radius:100px;padding:0 18px;height:42px;background:var(--paper);min-width:240px;color:var(--muted)}
+    .search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:12px}
+    .search input::placeholder{color:#9E9384}
 
     /* ── Product grid ── */
-    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-    .product{background:var(--paper);border:1px solid #dce8df;border-radius:15px;overflow:hidden;box-shadow:0 3px 20px rgba(20,50,30,.03);transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column}
-    .product:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-    .product-image{height:234px;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#ddf0e0,#eaf5ec);overflow:hidden;cursor:pointer}
-    .product-image:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.2);top:-70px;right:-50px}
-    .product-image.tone-1{background:linear-gradient(135deg,#e0f0e5,#c8e5d0)}
-    .product-image.tone-2{background:linear-gradient(135deg,#fce8e0,#f5d0c5)}
-    .product-image.tone-3{background:linear-gradient(135deg,#fdf5e0,#f5e0c0)}
-    .product-image img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1;transition:transform .3s ease}
-    .product-image:hover img{transform:scale(1.06)}
-    .product-zoom-hint{position:absolute;bottom:12px;right:12px;z-index:4;background:rgba(20,50,30,.65);color:#fff;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);pointer-events:none;opacity:0;transition:opacity .2s ease}
+    .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+    .product{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:12px;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(80,60,40,.04);transition:transform .2s ease,box-shadow .2s ease}
+    .product:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(80,60,40,.09)}
+    .product-image{height:220px;position:relative;display:flex;align-items:center;justify-content:center;background:#EAE2D2;border-radius:12px;overflow:hidden;cursor:pointer}
+    .product-image.tone-1{background:radial-gradient(circle at center,#F3EBE0,#D9CBB9)}
+    .product-image.tone-2{background:radial-gradient(circle at center,#F5EAE4,#DFCAC0)}
+    .product-image.tone-3{background:radial-gradient(circle at center,#FAF3E0,#E5D7B7)}
+    .product-image img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1;transition:transform .35s ease}
+    .product-image:hover img{transform:scale(1.05)}
+    .product-zoom-hint{position:absolute;bottom:10px;right:10px;z-index:4;background:rgba(14,59,46,.75);color:#fff;border-radius:99px;padding:4px 9px;font-size:10px;font-weight:700;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);pointer-events:none;opacity:0;transition:opacity .2s ease}
     .product-image:hover .product-zoom-hint{opacity:1}
-    .product-icon{font-size:108px;line-height:1;filter:drop-shadow(0 12px 10px rgba(30,60,30,.1));position:relative;z-index:1}
-    .product-tag{position:absolute;top:15px;left:15px;z-index:3;border-radius:4px;padding:8px 11px;color:#6b4a1c;background:#fdf5e0;font-size:10px;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
-    .product-tag.sold{background:#f9d8d5;color:#8c2e2e}
-    .product-tag.available{background:#d8f0e0;color:#1a6035}
+    .product-icon{font-size:90px;line-height:1;filter:drop-shadow(0 10px 8px rgba(30,40,30,.1));position:relative;z-index:1}
+
+    /* Badge top-left */
+    .product-tag{position:absolute;top:10px;left:10px;z-index:3;border-radius:5px;padding:5px 10px;color:#fff;background:var(--wine);font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.18);line-height:1.2}
+    .product-tag.sold{background:#626262}
+
+    .product-body{padding:14px 4px 4px;display:flex;flex-direction:column;flex:1}
+    .product-title{font-family:Georgia,serif;font-weight:700;font-size:17px;line-height:1.25;margin:0 0 4px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .product-cat{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500}
+    .product-rating{display:flex;align-items:center;gap:5px;margin-bottom:9px;font-size:12px}
+    .product-rating .stars{color:var(--gold);letter-spacing:1px;font-size:13px}
+    .product-rating .rating-val{color:var(--muted);font-weight:600;font-size:11.5px}
+
+    .product-pricing{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}
+    .product-pricing .price{font-family:Georgia,serif;font-weight:800;color:var(--ink);font-size:18px}
+    .product-pricing .old-price{font-size:13px;color:#9E9384;text-decoration:line-through}
+    .product-pricing .price.ask{font-size:13px;color:var(--muted);font-style:italic;font-family:inherit;font-weight:600}
+
+    .product-action{margin-top:auto}
+    .product-add-btn{width:100%;border:0;border-radius:9px;background:var(--pine);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:12px 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .16s,transform .16s}
+    .product-add-btn:hover{background:var(--pine-hover);transform:translateY(-1px)}
+    .product-add-btn:disabled{background:#C8BFB2;cursor:not-allowed}
+
+    .qty-control{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--pine);border-radius:9px;background:var(--paper);padding:4px 6px}
+    .qty-btn{background:var(--pine);color:#fff;width:28px;height:28px;border-radius:6px;border:0;display:grid;place-items:center;font-size:14px;font-weight:800;transition:.15s}
+    .qty-btn:hover{background:var(--pine-hover)}
+    .qty-btn:disabled{background:#C8BFB2;cursor:not-allowed}
+    .qty-num{font-size:13px;font-weight:800;color:var(--pine)}
+
+    .empty-products{padding:65px 25px;text-align:center;background:var(--paper);border:1px dashed #D0C4B0;border-radius:15px;color:var(--muted);grid-column:1/-1}
+    .empty-products strong{display:block;color:var(--pine);font-size:19px;margin:10px 0}
 
     /* ── Lightbox Pop-up ── */
-    .lightbox{position:fixed;inset:0;z-index:200;background:rgba(7,24,14,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+    .lightbox{position:fixed;inset:0;z-index:200;background:rgba(12,24,18,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease}
     .lightbox.open{opacity:1;pointer-events:auto}
-    .lightbox-modal{background:#fff;border-radius:18px;max-width:min(640px,94vw);width:100%;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;position:relative;transform:scale(.92);transition:transform .25s ease}
+    .lightbox-modal{background:#FAF5EB;border:1px solid #EBE0CF;border-radius:18px;max-width:min(640px,94vw);width:100%;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;position:relative;transform:scale(.92);transition:transform .25s ease}
     .lightbox.open .lightbox-modal{transform:scale(1)}
     .lightbox-close{position:absolute;top:14px;right:14px;z-index:10;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#1c3828;display:grid;place-items:center;font-size:20px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.15);transition:background .15s}
     .lightbox-close:hover{background:#fff;transform:scale(1.05)}
-    .lightbox-img-wrap{max-height:480px;height:55vh;min-height:280px;background:#f0f5f2;display:grid;place-items:center;overflow:hidden}
+    .lightbox-img-wrap{max-height:480px;height:55vh;min-height:280px;background:#F0E7D8;display:grid;place-items:center;overflow:hidden}
     .lightbox-img-wrap img{width:100%;height:100%;object-fit:contain}
     .lightbox-img-wrap .lightbox-emoji{font-size:130px}
-    .lightbox-body{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border-top:1px solid #e5ede7}
-    .lightbox-info strong{display:block;font-size:18px;font-family:Georgia,serif;color:var(--pine-dark)}
+    .lightbox-body{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;background:#FAF5EB;border-top:1px solid #E5DAC8}
+    .lightbox-info strong{display:block;font-size:18px;font-family:Georgia,serif;color:var(--ink)}
     .lightbox-info span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
-    .product-body{padding:22px;display:flex;flex-direction:column;flex:1}
-    .category{color:#8a6220;letter-spacing:.13em;font-size:10px;text-transform:uppercase;font-weight:900}
-    .product h3{font-family:Georgia,serif;font-weight:400;font-size:24px;line-height:1.18;letter-spacing:-.03em;margin:10px 0 10px}
-    .product-desc{font-size:12px;line-height:1.7;color:#6a7f70;margin:0;min-height:41px;flex:1}
-    .product-foot{border-top:1px solid #eaeee8;margin-top:19px;padding-top:17px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-    .price{font-weight:850;color:var(--pine);font-size:18px}
-    .price.ask{font-size:12px;line-height:1.25;color:var(--muted)}
-    .product-add{border:0;border-radius:100px;background:var(--pine);color:#fff;font-size:12px;font-weight:850;padding:12px 16px;white-space:nowrap;transition:.15s}
-    .product-add:hover{background:var(--wine)}
-    .product-add:disabled{background:#b8c8bc;cursor:not-allowed}
-    .empty-products{padding:65px 25px;text-align:center;background:#fff;border:1px dashed #b8d0c0;border-radius:15px;color:var(--muted);grid-column:1/-1}
-    .empty-products strong{display:block;color:var(--pine);font-size:19px;margin:10px 0}
 
     /* ── Strip ── */
-    .strip{text-align:center;background:#e8f5ec;padding:28px 20px;color:#2a6040}
+    .strip{text-align:center;background:#EFE6D6;padding:28px 20px;color:#28382E;border-top:1px solid #E2D6C0;border-bottom:1px solid #E2D6C0}
     .strip strong{font-family:Georgia,serif;font-size:22px;font-weight:normal;letter-spacing:-.015em}
-    .strip span{display:block;font-size:12px;color:#5a8060;margin-top:6px}
+    .strip span{display:block;font-size:12px;color:#6A6050;margin-top:6px}
 
     /* ── How it works ── */
-    .how{background:#f0f7f2}
+    .how{background:#F3EBDD}
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
     .step{border-top:2px solid var(--gold);padding-top:24px}
-    .step-no{font-family:Georgia,serif;color:#b08030;font-size:43px;font-style:italic;line-height:1}
-    .step h3{font-family:Georgia,serif;font-size:22px;font-weight:normal;margin:18px 0 10px}
-    .step p{font-size:13px;color:#607a67;line-height:1.85;max-width:340px}
-    .notice{margin-top:37px;border:1px solid #ccdad0;background:#f8fcf9;border-radius:10px;padding:17px 21px;color:#557062;font-size:12px;display:flex;gap:11px;line-height:1.65}
+    .step-no{font-family:Georgia,serif;color:var(--gold-dark);font-size:43px;font-style:italic;line-height:1}
+    .step h3{font-family:Georgia,serif;font-size:22px;font-weight:normal;margin:18px 0 10px;color:var(--ink)}
+    .step p{font-size:13px;color:#655C50;line-height:1.85;max-width:340px}
+    .notice{margin-top:37px;border:1px solid #D8CBB7;background:#FFFDF9;border-radius:10px;padding:17px 21px;color:#5A5244;font-size:12px;display:flex;gap:11px;line-height:1.65}
 
     /* ── Final CTA ── */
-    .final-cta{background:linear-gradient(115deg,#0d3d21,#1a6038);padding:67px 0;color:#fff;overflow:hidden;position:relative}
+    .final-cta{background:linear-gradient(115deg,#08281F,#0E3B2E);padding:67px 0;color:#fff;overflow:hidden;position:relative}
     .final-cta:before{content:"🌿";position:absolute;left:5%;top:-50px;opacity:.08;font-size:300px}
     .final-inner{display:flex;justify-content:space-between;gap:25px;align-items:center;position:relative}
     .final-inner h2{font:400 37px/1.15 Georgia,serif;margin:10px 0}
     .final-inner p{font-size:13px;color:#a8d4b8;line-height:1.7}
 
     /* ── Footer ── */
-    .footer{background:#0a2e18;padding:35px 0;color:#90b8a0}
+    .footer{background:#082018;padding:35px 0;color:#90b8a0}
     .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .footer small{font-size:11px;line-height:1.8}
     .footer .brand-title{color:#e8f5ec;font-size:18px;font-family:Georgia,serif}
     .footer a:hover{text-decoration:underline}
 
     /* ── Float cart ── */
-    .float-cart{position:fixed;bottom:23px;right:23px;z-index:20;display:flex;align-items:center;gap:12px;background:var(--wine);color:#fff;border:0;border-radius:100px;box-shadow:0 10px 30px rgba(80,20,15,.3);padding:15px 21px;font-size:13px;font-weight:800;transition:.2s}
+    .float-cart{position:fixed;bottom:23px;right:23px;z-index:20;display:flex;align-items:center;gap:12px;background:var(--pine);color:#fff;border:0;border-radius:100px;box-shadow:0 10px 30px rgba(14,59,46,.35);padding:15px 21px;font-size:13px;font-weight:800;transition:.2s}
+    .float-cart:hover{background:var(--pine-hover)}
     .float-cart:hover{background:#a93226}
     .float-cart[hidden]{display:none}
 
@@ -232,13 +253,21 @@
     .hide{display:none!important}
 
     /* ── Responsive ── */
+    @media(max-width:1120px){
+      .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
     @media(max-width:990px){
       .navlinks{display:none}
       .hero{background-image:linear-gradient(90deg,rgba(10,38,22,.94) 0%,rgba(10,38,22,.84) 55%,rgba(10,38,22,.5) 100%),url('hero-banner.png')}
       .hero-grid{grid-template-columns:1fr}
       .hero h1{font-size:54px}
-      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .admin-layout{grid-template-columns:260px 1fr}
+    }
+    @media(max-width:768px){
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+      .product{padding:10px}
+      .product-image{height:180px}
+      .product-title{font-size:15px}
     }
     @media(max-width:640px){
       .container{width:calc(100% - 34px)}
@@ -254,9 +283,9 @@
       .hero p{font-size:14px}
       .benefits{margin-top:-18px}
       .benefit-row{width:calc(100% - 24px);grid-template-columns:repeat(2,1fr);row-gap:14px;padding:14px 10px;gap:0;border-radius:16px}
-      .benefit{padding:6px 8px;gap:8px;border-right:1px solid #e3ede6;align-items:center}
+      .benefit{padding:6px 8px;gap:8px;border-right:1px solid #EBE0CF;align-items:center}
       .benefit:nth-child(2){border-right:0}
-      .benefit:nth-child(3){border-right:1px solid #e3ede6}
+      .benefit:nth-child(3){border-right:1px solid #EBE0CF}
       .benefit:last-child{border-right:0}
       .benefit-icon{width:36px;height:36px;font-size:17px;flex:none}
       .benefit strong{font-size:11px}
@@ -268,9 +297,6 @@
       .tabs{gap:6px}
       .tab{font-size:11px;padding:9px 12px}
       .search{flex:1}
-      .product-grid{grid-template-columns:1fr;gap:16px}
-      .product-image{height:250px}
-      .product h3{font-size:25px}
       .strip strong{font-size:20px}
       .steps{grid-template-columns:1fr;gap:23px;margin-top:30px}
       .step{padding-top:17px}
@@ -291,12 +317,12 @@
       .upload-preview{height:75px;width:75px}
     }
     @media(max-width:480px){
+      .product-grid{grid-template-columns:1fr}
       .drawer-head{padding:17px}
       .drawer-scroll{padding:14px 18px}
       .drawer-foot{padding:13px 18px 19px}
       .field{margin:13px 0}
       .field input{min-height:47px;font-size:16px}
-      .product-add{min-height:44px}
       .admin-card{padding:17px}
       .nav-actions .cart-top{min-width:48px;min-height:43px}
     }
@@ -651,49 +677,49 @@
 // ── Default products ──────────────────────────────────────────────────────────
 const DEFAULT_PRODUCTS = [
   {
-    id: 1, name: "Ghirlanda Classica Rossa", cat: "Ghirlande",
+    id: 1, name: "Ghirlanda Classica Rossa", cat: "Ghirlande", tag: "BESTSELLER",
     desc: "Ghirlanda in pino fresco con bacche rosse, pigne dorate e nastro in velluto. Diametro ø 40 cm.",
-    price: "€ 45", emoji: "🎄", status: "available", img: null, tone: "tone-1"
+    price: "€ 45", oldPrice: "€ 55", rating: "4.9", emoji: "🎄", status: "available", img: null, tone: "tone-1"
   },
   {
-    id: 2, name: "Centrotavola Natalizio Gold", cat: "Centrotavola",
+    id: 2, name: "Centrotavola Natalizio Gold", cat: "Centrotavola", tag: "IDEA REGALO",
     desc: "Composizione con rami di abete, cinnamomo, stelle di natale bianche e candela profumata.",
-    price: "€ 38", emoji: "🕯️", status: "available", img: null, tone: "tone-3"
+    price: "€ 38", oldPrice: "€ 48", rating: "4.8", emoji: "🕯️", status: "available", img: null, tone: "tone-3"
   },
   {
-    id: 3, name: "Bouquet Rosso & Bianco", cat: "Bouquet",
+    id: 3, name: "Bouquet Rosso & Bianco", cat: "Bouquet", tag: "PREFERITO",
     desc: "Bouquet invernale con amarilli rossi, rami di bacche bianche e foglie di agrifoglio. Su ordinazione.",
-    price: "€ 55", emoji: "🌹", status: "available", img: null, tone: "tone-2"
+    price: "€ 55", oldPrice: "€ 68", rating: "4.9", emoji: "🌹", status: "available", img: null, tone: "tone-2"
   },
   {
-    id: 4, name: "Ghirlanda Moderna Minimal", cat: "Ghirlande",
+    id: 4, name: "Ghirlanda Moderna Minimal", cat: "Ghirlande", tag: "NOVITÀ",
     desc: "Ghirlanda boho con cotone essiccato, eucalipto, pigne naturali e fiocco in juta. Ø 35 cm.",
-    price: "€ 40", emoji: "🌿", status: "available", img: null, tone: "tone-1"
+    price: "€ 40", oldPrice: "€ 50", rating: "4.7", emoji: "🌿", status: "available", img: null, tone: "tone-1"
   },
   {
-    id: 5, name: "Composizione Candela Natale", cat: "Composizioni",
+    id: 5, name: "Composizione Candela Natale", cat: "Composizioni", tag: "IDEA REGALO",
     desc: "Base in muschio con tre candele avvolte in abete, agrifoglio e rametti di eucalipto.",
-    price: "€ 32", emoji: "🕯️", status: "limited", img: null, tone: "tone-3"
+    price: "€ 32", oldPrice: "€ 42", rating: "4.8", emoji: "🕯️", status: "limited", img: null, tone: "tone-3"
   },
   {
-    id: 6, name: "Ramo di Abete Decorato", cat: "Alberi",
+    id: 6, name: "Ramo di Abete Decorato", cat: "Alberi", tag: "BESTSELLER",
     desc: "Ramo singolo di abete naturale decorato con luci led, palline e nastri. Altezza 80 cm.",
-    price: "€ 28", emoji: "🌲", status: "available", img: null, tone: "tone-1"
+    price: "€ 28", oldPrice: "€ 35", rating: "4.9", emoji: "🌲", status: "available", img: null, tone: "tone-1"
   },
   {
-    id: 7, name: "Stella di Natale XXL", cat: "Composizioni",
+    id: 7, name: "Stella di Natale XXL", cat: "Composizioni", tag: "NOVITÀ",
     desc: "Stella di natale in grande formato (ø 25 cm) avvolta in carta kraft decorata con nastro dorato.",
-    price: "€ 22", emoji: "🌺", status: "available", img: null, tone: "tone-2"
+    price: "€ 22", oldPrice: "€ 28", rating: "4.8", emoji: "🌺", status: "available", img: null, tone: "tone-2"
   },
   {
-    id: 8, name: "Centrotavola Rustico", cat: "Centrotavola",
+    id: 8, name: "Centrotavola Rustico", cat: "Centrotavola", tag: "PREFERITO",
     desc: "Base di tronchetto con muschio, pigne, stelle di anice, cannella e fiori secchi.",
-    price: "€ 35", emoji: "🍂", status: "available", img: null, tone: "tone-3"
+    price: "€ 35", oldPrice: "€ 45", rating: "4.9", emoji: "🍂", status: "available", img: null, tone: "tone-3"
   },
   {
-    id: 9, name: "Ghirlanda Secca & Profumata", cat: "Ghirlande",
+    id: 9, name: "Ghirlanda Secca & Profumata", cat: "Ghirlande", tag: "ESAURITO",
     desc: "Ghirlanda di fiori secchi, lavanda, anice, cannella e agrumi essiccati. Ø 30 cm.",
-    price: "€ 36", emoji: "🌸", status: "sold", img: null, tone: "tone-2"
+    price: "€ 36", oldPrice: "€ 44", rating: "4.7", emoji: "🌸", status: "sold", img: null, tone: "tone-2"
   }
 ];
 
@@ -741,36 +767,61 @@ function renderProducts(filter) {
     return;
   }
 
-  grid.innerHTML = list.map(p => {
+  const defaultTags = ["BESTSELLER", "IDEA REGALO", "PREFERITO", "NOVITÀ"];
+  const defaultRatings = ["4.9", "4.8", "4.9", "4.7", "4.8", "4.9", "4.8", "4.9", "4.7"];
+
+  grid.innerHTML = list.map((p, idx) => {
     const inCart = cart[p.id] || 0;
-    const tagClass = p.status === "sold" ? "sold" : p.status === "limited" ? "" : "available";
-    const tagLabel = p.status === "sold" ? "Esaurito" : p.status === "limited" ? "Ultimi pezzi" : "Disponibile";
-    const disabled = p.status === "sold" ? "disabled" : "";
+    const isSold = p.status === "sold";
+    const disabled = isSold ? "disabled" : "";
+    const tagClass = isSold ? "sold" : "";
+    const tagLabel = isSold ? "ESAURITO" : (p.tag || (p.status === "limited" ? "ULTIMI PEZZI" : defaultTags[idx % defaultTags.length]));
+    const ratingVal = p.rating || defaultRatings[idx % defaultRatings.length];
+
+    let oldPriceHtml = "";
+    if (p.oldPrice) {
+      oldPriceHtml = `<span class="old-price">${p.oldPrice}</span>`;
+    } else if (p.price && p.price.includes("€")) {
+      const num = parseInt(p.price.replace(/[^\d]/g, ""), 10);
+      if (!isNaN(num) && num > 0) {
+        const oldNum = Math.round(num * 1.25);
+        oldPriceHtml = `<span class="old-price">€ ${oldNum}</span>`;
+      }
+    }
+
     const imgEl = p.img
       ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
       : `<span class="product-icon" aria-hidden="true">${p.emoji || "🌿"}</span>`;
+
     return `
     <article class="product" aria-label="${p.name}">
-      <div class="product-image ${p.tone || ''}" onclick="openLightbox(${p.id})" title="Clicca per ingrandire la foto">
+      <div class="product-image ${p.tone || 'tone-1'}" onclick="openLightbox(${p.id})" title="Clicca per ingrandire">
         <span class="product-tag ${tagClass}">${tagLabel}</span>
         ${imgEl}
         <span class="product-zoom-hint">🔍 Ingrandisci</span>
       </div>
       <div class="product-body">
-        <span class="category">${p.cat}</span>
-        <h3>${p.name}</h3>
-        <p class="product-desc">${p.desc}</p>
-        <div class="product-foot">
-          <span class="price ${!p.price?'ask':''}">${p.price || "Prezzo su richiesta"}</span>
+        <h3 class="product-title" title="${p.name}">${p.name}</h3>
+        <span class="product-cat">${p.cat}</span>
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-val">(${ratingVal})</span>
+        </div>
+        <div class="product-pricing">
+          <span class="price ${!p.price ? 'ask' : ''}">${p.price || "Su richiesta"}</span>
+          ${oldPriceHtml}
+        </div>
+        <div class="product-action">
           ${inCart > 0 ? `
-            <div style="display:flex;align-items:center;gap:8px">
-              <button class="product-add" onclick="changeQty(${p.id},-1)" style="padding:10px 12px" aria-label="Rimuovi">−</button>
-              <span style="font-size:13px;font-weight:800">${inCart}</span>
-              <button class="product-add" onclick="changeQty(${p.id},1)" style="padding:10px 12px" ${disabled} aria-label="Aggiungi">+</button>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Rimuovi">−</button>
+              <span class="qty-num">${inCart}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id},1)" ${disabled} aria-label="Aggiungi">+</button>
             </div>
           ` : `
-            <button class="product-add" onclick="addToCart(${p.id})" ${disabled}>
-              ${disabled ? "Esaurito" : "+ Aggiungi"}
+            <button class="product-add-btn" onclick="addToCart(${p.id})" ${disabled}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              ${isSold ? "ESAURITO" : "AGGIUNGI"}
             </button>
           `}
         </div>
