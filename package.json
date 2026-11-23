@@ -1,6 +1,14 @@
 {
+  "name": "berlingieri-fiori",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Static site ready')\""
+  },
   "dependencies": {
-    "pdfjs-dist": "^6.4.299",
-    "puppeteer": "^25.16.0"
+    "express": "^4.21.2",
+    "pdfjs-dist": "^6.4.299"
   }
 }

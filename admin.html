@@ -541,6 +541,222 @@
       min-height: 18px;
       margin-bottom: 12px;
     }
+
+    /* View Tabs */
+    .view-tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .view-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .view-tab:hover {
+      border-color: var(--pine);
+      color: var(--pine);
+    }
+    .view-tab.active {
+      background: var(--pine);
+      border-color: var(--pine);
+      color: #fff;
+    }
+    .view-tab-count {
+      background: rgba(14, 59, 46, 0.1);
+      color: var(--pine);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .view-tab.active .view-tab-count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #fff;
+    }
+
+    /* Category Manager */
+    .cat-workspace {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 1080px) {
+      .cat-workspace { grid-template-columns: 1fr; }
+    }
+    .cat-add-form {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #fafcfb;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .cat-add-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cat-add-row input {
+      flex: 1;
+      min-width: 220px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 14px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+    }
+    .cat-add-row input:focus {
+      border-color: var(--pine);
+      box-shadow: 0 0 0 3px rgba(14, 59, 46, 0.12);
+    }
+    .cat-form-err {
+      color: var(--wine);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .cat-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-row {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fff;
+    }
+    .cat-row:last-child {
+      border-bottom: none;
+    }
+    .cat-row-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .cat-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+    .cat-order-btns {
+      display: flex;
+      gap: 4px;
+    }
+    .cat-name-block {
+      min-width: 0;
+    }
+    .cat-name-block strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .cat-name-block small {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .cat-row-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cat-count-badge {
+      background: #eaf5ee;
+      color: var(--pine);
+      border: 1px solid #cce3d4;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .cat-inline-panel {
+      background: #f9f6ef;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cat-inline-panel input,
+    .cat-inline-panel select {
+      flex: 1;
+      min-width: 180px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 10px;
+      font-size: 13px;
+      background: #fff;
+    }
+    .cat-preview-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cat-preview-pill {
+      border: 1px solid #DFD5C4;
+      border-radius: 100px;
+      padding: 8px 14px;
+      background: #FFFDF9;
+      color: #655A4C;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .cat-preview-pill.active {
+      background: var(--pine);
+      border-color: var(--pine);
+      color: #fff;
+    }
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .inline-link-btn {
+      background: none;
+      border: 0;
+      color: var(--pine);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+    .empty-state {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .empty-state span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -620,8 +836,18 @@
       </div>
     </section>
 
+    <!-- View Switcher -->
+    <nav class="view-tabs" aria-label="Sezioni dashboard">
+      <button type="button" class="view-tab active" id="tabViewProducts" onclick="switchView('products')">
+        📦 Articoli <span class="view-tab-count" id="tabProdCount">0</span>
+      </button>
+      <button type="button" class="view-tab" id="tabViewCategories" onclick="switchView('categories')">
+        🏷️ Gestione Categorie <span class="view-tab-count" id="tabCatCount">0</span>
+      </button>
+    </nav>
+
     <!-- Workspace: Product Table (Left) + Form Editor (Right) -->
-    <div class="workspace">
+    <div class="workspace" id="productsView">
       
       <!-- Table Card -->
       <section class="card">
@@ -690,14 +916,11 @@
 
           <div class="grid-2">
             <div class="field-group">
-              <label>Categoria</label>
-              <select id="fCat">
-                <option value="Ghirlande">Ghirlande</option>
-                <option value="Centrotavola">Centrotavola</option>
-                <option value="Bouquet">Bouquet</option>
-                <option value="Alberi">Alberi &amp; Rami</option>
-                <option value="Composizioni">Composizioni</option>
-              </select>
+              <div class="label-row">
+                <label for="fCat">Categoria</label>
+                <button type="button" class="inline-link-btn" onclick="switchView('categories')">Gestisci categorie</button>
+              </div>
+              <select id="fCat"></select>
             </div>
             <div class="field-group">
               <label>Prezzo (es: € 45)</label>
@@ -754,6 +977,49 @@
       </aside>
 
     </div>
+
+    <!-- Categories Workspace -->
+    <div class="cat-workspace" id="categoriesView" style="display:none;">
+      <section class="card">
+        <div class="card-header">
+          <h2>🏷️ Gestione Categorie</h2>
+          <span style="font-size:12px; color:var(--muted);">Ordina, rinomina o aggiungi categorie</span>
+        </div>
+
+        <form class="cat-add-form" onsubmit="handleAddCategory(event)">
+          <label for="newCatName" style="font-size:12px; font-weight:700; color:var(--text);">Nuova categoria</label>
+          <div class="cat-add-row">
+            <input type="text" id="newCatName" maxlength="40" placeholder="Es. Segnaposto, Corone d'Avvento, Confezioni Regalo…">
+            <button type="submit" class="btn btn-primary">+ Aggiungi Categoria</button>
+          </div>
+          <div class="cat-form-err" id="catFormError" role="alert" style="display:none;"></div>
+        </form>
+
+        <div class="cat-list" id="categoriesList"></div>
+      </section>
+
+      <aside class="card editor-card">
+        <div class="card-header">
+          <h2>👁️ Anteprima nel Negozio</h2>
+        </div>
+        <div class="editor-body">
+          <p style="font-size:13px; color:var(--muted); line-height:1.6;">
+            Le categorie appaiono nei filtri del catalogo pubblico esattamente in questo ordine. Rinominando una categoria, tutti gli articoli associati vengono aggiornati automaticamente.
+          </p>
+          <div class="cat-preview-pills" id="catStorePreview"></div>
+          <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px; display:flex; flex-direction:column; gap:10px;">
+            <button type="button" class="btn btn-secondary" id="resetCatsBtn" onclick="promptResetCategories()">
+              ↺ Ripristina categorie predefinite
+            </button>
+            <div id="resetCatsConfirm" class="cat-inline-panel" style="display:none;">
+              <span style="font-size:12px; color:var(--text); flex:1;">Ripristinare le 5 categorie originali? Le categorie con articoli esistenti verranno mantenute.</span>
+              <button type="button" class="btn btn-primary" style="padding:7px 12px; font-size:12px;" onclick="confirmResetCategories()">Conferma</button>
+              <button type="button" class="btn btn-secondary" style="padding:7px 12px; font-size:12px;" onclick="cancelResetCategories()">Annulla</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <!-- Toast Notification -->
@@ -762,57 +1028,12 @@
     <span id="toastMsg">Operazione completata con successo</span>
   </div>
 
+  <script src="catalog-logic.js"></script>
   <script>
-    // ── Local Storage Key sincronizzata con index.html ──
-    const STORAGE_KEY = "bf_products_2026";
-
-    const DEFAULT_PRODUCTS = [
-      {
-        id: 1, name: "Ghirlanda Classica Rossa", cat: "Ghirlande",
-        desc: "Ghirlanda in pino fresco con bacche rosse, pigne dorate e nastro in velluto. Diametro ø 40 cm.",
-        price: "€ 45", emoji: "🎄", status: "available", img: null, tone: "tone-1"
-      },
-      {
-        id: 2, name: "Centrotavola Natalizio Gold", cat: "Centrotavola",
-        desc: "Composizione con rami di abete, cinnamomo, stelle di natale bianche e candela profumata.",
-        price: "€ 38", emoji: "🕯️", status: "available", img: null, tone: "tone-3"
-      },
-      {
-        id: 3, name: "Bouquet Rosso & Bianco", cat: "Bouquet",
-        desc: "Bouquet invernale con amarilli rossi, rami di bacche bianche e foglie di agrifoglio. Su ordinazione.",
-        price: "€ 55", emoji: "🌹", status: "available", img: null, tone: "tone-2"
-      },
-      {
-        id: 4, name: "Ghirlanda Moderna Minimal", cat: "Ghirlande",
-        desc: "Ghirlanda boho con cotone essiccato, eucalipto, pigne naturali e fiocco in juta. Ø 35 cm.",
-        price: "€ 40", emoji: "🌿", status: "available", img: null, tone: "tone-1"
-      },
-      {
-        id: 5, name: "Composizione Candela Natale", cat: "Composizioni",
-        desc: "Base in muschio con tre candele avvolte in abete, agrifoglio e rametti di eucalipto.",
-        price: "€ 32", emoji: "🕯️", status: "limited", img: null, tone: "tone-3"
-      },
-      {
-        id: 6, name: "Ramo di Abete Decorato", cat: "Alberi",
-        desc: "Ramo singolo di abete naturale decorato con luci led, palline e nastri. Altezza 80 cm.",
-        price: "€ 28", emoji: "🌲", status: "available", img: null, tone: "tone-1"
-      },
-      {
-        id: 7, name: "Stella di Natale XXL", cat: "Composizioni",
-        desc: "Stella di natale in grande formato (ø 25 cm) avvolta in carta kraft decorata con nastro dorato.",
-        price: "€ 22", emoji: "🌺", status: "available", img: null, tone: "tone-2"
-      },
-      {
-        id: 8, name: "Centrotavola Rustico", cat: "Centrotavola",
-        desc: "Base di tronchetto con muschio, pigne, stelle di anice, cannella e fiori secchi.",
-        price: "€ 35", emoji: "🍂", status: "available", img: null, tone: "tone-3"
-      },
-      {
-        id: 9, name: "Ghirlanda Secca & Profumata", cat: "Ghirlande",
-        desc: "Ghirlanda di fiori secchi, lavanda, anice, cannella e agrumi essiccati. Ø 30 cm.",
-        price: "€ 36", emoji: "🌸", status: "sold", img: null, tone: "tone-2"
-      }
-    ];
+    // ── Local Storage Keys sincronizzate con index.html ──
+    const STORAGE_KEY = CatalogLogic.STORAGE_KEYS.PRODUCTS;
+    const CATEGORIES_STORAGE_KEY = CatalogLogic.STORAGE_KEYS.CATEGORIES;
+    const DEFAULT_PRODUCTS = CatalogLogic.DEFAULT_PRODUCTS;
 
     // ── Autenticazione Amministratore ──
     const AUTH_SESSION_KEY = "bf_admin_auth_2026";
@@ -864,9 +1085,37 @@
     }
 
     let products = [];
+    let categories = [];
     let currentEditingId = null;
     let selectedCategory = "tutti";
     let pendingImgBase64 = null;
+    let activeView = "products";
+    let renamingCatId = null;
+    let deletingCatId = null;
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function loadCategoriesFromStorage() {
+      let rawCats = null;
+      const storedCats = localStorage.getItem(CATEGORIES_STORAGE_KEY);
+      if (storedCats) {
+        try {
+          rawCats = JSON.parse(storedCats);
+        } catch (e) {
+          rawCats = null;
+        }
+      }
+      categories = CatalogLogic.mergeCategoriesFromProducts(rawCats, products);
+      if (!storedCats) {
+        localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
+      }
+    }
 
     // Inizializzazione
     function init() {
@@ -880,21 +1129,50 @@
         }
       } else {
         products = [...DEFAULT_PRODUCTS];
-        persist();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
       }
+      loadCategoriesFromStorage();
+      renderCategoryControls();
       renderStats();
       renderTable();
+      renderCategoriesManager();
     }
 
     function persist() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+        localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
         renderStats();
         return true;
       } catch (err) {
         console.error("Storage error:", err);
-        alert("⚠️ Errore di salvataggio (Spazio memoria esaurito per le immagini).\n\nConsiglio: prova a ricaricare una foto più leggera o rimuovere foto pesanti da altri articoli.");
+        showToast("Spazio memoria esaurito: usa una foto più leggera.");
         return false;
+      }
+    }
+
+    function persistCategoriesOnly() {
+      try {
+        localStorage.setItem(CATEGORIES_STORAGE_KEY, JSON.stringify(categories));
+        return true;
+      } catch (err) {
+        console.error("Storage error:", err);
+        return false;
+      }
+    }
+
+    // View Switching
+    function switchView(view) {
+      activeView = view === "categories" ? "categories" : "products";
+      document.getElementById("productsView").style.display = activeView === "products" ? "grid" : "none";
+      document.getElementById("categoriesView").style.display = activeView === "categories" ? "grid" : "none";
+      document.getElementById("tabViewProducts").classList.toggle("active", activeView === "products");
+      document.getElementById("tabViewCategories").classList.toggle("active", activeView === "categories");
+      if (activeView === "categories") {
+        renderCategoriesManager();
+      } else {
+        renderCategoryControls();
+        renderTable();
       }
     }
 
@@ -904,6 +1182,35 @@
       document.getElementById("kpiAvail").textContent = products.filter(p => p.status === "available").length;
       document.getElementById("kpiLimited").textContent = products.filter(p => p.status === "limited").length;
       document.getElementById("kpiSold").textContent = products.filter(p => p.status === "sold").length;
+      document.getElementById("tabProdCount").textContent = products.length;
+      document.getElementById("tabCatCount").textContent = categories.length;
+    }
+
+    function renderCategoryControls() {
+      // Update filter pills
+      const pills = document.getElementById("catPills");
+      if (selectedCategory !== "tutti" && !categories.some(c => c.id === selectedCategory)) {
+        selectedCategory = "tutti";
+      }
+      pills.innerHTML = [
+        `<button class="pill ${selectedCategory === "tutti" ? "active" : ""}" data-cat="tutti" onclick="selectCat(this)">Tutti</button>`,
+        ...categories.map(c =>
+          `<button class="pill ${selectedCategory === c.id ? "active" : ""}" data-cat="${escapeHtml(c.id)}" onclick="selectCat(this)">${escapeHtml(c.name)}</button>`
+        )
+      ].join("");
+
+      // Update product editor select
+      const selectEl = document.getElementById("fCat");
+      const prevVal = selectEl.value;
+      selectEl.innerHTML = categories.map(c =>
+        `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`
+      ).join("");
+      if (prevVal && categories.some(c => c.id === prevVal)) {
+        selectEl.value = prevVal;
+      } else if (categories.length) {
+        selectEl.value = categories[0].id;
+      }
+      document.getElementById("tabCatCount").textContent = categories.length;
     }
 
     // Filtri
@@ -952,7 +1259,7 @@
                 </div>
               </div>
             </td>
-            <td><strong>${p.cat}</strong></td>
+            <td><strong>${escapeHtml(CatalogLogic.getCategoryLabel(categories, p.cat))}</strong></td>
             <td><strong>${p.price || 'Su richiesta'}</strong></td>
             <td>
               <span class="badge ${statusClass}">${statusLabel}</span>
@@ -993,12 +1300,15 @@
     }
 
     function initNewProduct() {
+      if (activeView !== "products") {
+        switchView("products");
+      }
       currentEditingId = null;
       document.getElementById("formHeading").textContent = "✨ Nuovo Articolo";
       document.getElementById("editIdBadge").textContent = "ID: Auto";
 
       document.getElementById("fName").value = "";
-      document.getElementById("fCat").value = "Ghirlande";
+      document.getElementById("fCat").value = categories.length ? categories[0].id : "";
       document.getElementById("fPrice").value = "";
       document.getElementById("fStatus").value = "available";
       document.getElementById("fEmoji").value = "🎄";
@@ -1008,6 +1318,7 @@
       document.getElementById("fFile").value = "";
       updateImgPreviewUI();
       renderTable();
+      setTimeout(() => document.getElementById("fName")?.focus(), 20);
     }
 
     // Compressione automatica immagini via Canvas
@@ -1144,9 +1455,207 @@
       showToast(`Articolo eliminato.`);
     }
 
+    // ── Gestione Categorie ──
+    function renderCategoriesManager() {
+      const container = document.getElementById("categoriesList");
+      const preview = document.getElementById("catStorePreview");
+      if (!container || !preview) return;
+
+      const stats = CatalogLogic.countProductsByCategory(categories, products);
+
+      container.innerHTML = categories.map((cat, idx) => {
+        const count = stats.counts[cat.id] || 0;
+        const isRenaming = renamingCatId === cat.id;
+        const isDeleting = deletingCatId === cat.id;
+        const otherCats = categories.filter(c => c.id !== cat.id);
+
+        let inlinePanel = "";
+        if (isRenaming) {
+          inlinePanel = `
+            <div class="cat-inline-panel">
+              <input type="text" id="renameCatInput" value="${escapeHtml(cat.name)}" maxlength="40" aria-label="Nuovo nome categoria" onkeydown="if(event.key==='Enter'){event.preventDefault();confirmRenameCategory('${escapeHtml(cat.id)}')}">
+              <button type="button" class="btn btn-primary" style="padding:7px 14px; font-size:12px;" onclick="confirmRenameCategory('${escapeHtml(cat.id)}')">Salva</button>
+              <button type="button" class="btn btn-secondary" style="padding:7px 14px; font-size:12px;" onclick="cancelCategoryAction()">Annulla</button>
+              <div class="cat-form-err" id="renameCatError" style="width:100%; display:none;"></div>
+            </div>`;
+        } else if (isDeleting) {
+          if (count > 0) {
+            inlinePanel = `
+              <div class="cat-inline-panel">
+                <span style="font-size:12px; color:var(--text); width:100%;">
+                  Questa categoria contiene <strong>${count} ${count === 1 ? "articolo" : "articoli"}</strong>. Spostali prima in:
+                </span>
+                <select id="reassignCatSelect" aria-label="Categoria di destinazione">
+                  ${otherCats.map(oc => `<option value="${escapeHtml(oc.id)}">${escapeHtml(oc.name)}</option>`).join("")}
+                </select>
+                <button type="button" class="btn btn-danger" style="padding:7px 14px; font-size:12px;" onclick="confirmDeleteCategory('${escapeHtml(cat.id)}')">Sposta ed Elimina</button>
+                <button type="button" class="btn btn-secondary" style="padding:7px 14px; font-size:12px;" onclick="cancelCategoryAction()">Annulla</button>
+              </div>`;
+          } else {
+            inlinePanel = `
+              <div class="cat-inline-panel">
+                <span style="font-size:12px; color:var(--text); flex:1;">Eliminare la categoria "${escapeHtml(cat.name)}"?</span>
+                <button type="button" class="btn btn-danger" style="padding:7px 14px; font-size:12px;" onclick="confirmDeleteCategory('${escapeHtml(cat.id)}')">Conferma eliminazione</button>
+                <button type="button" class="btn btn-secondary" style="padding:7px 14px; font-size:12px;" onclick="cancelCategoryAction()">Annulla</button>
+              </div>`;
+          }
+        }
+
+        return `
+          <div class="cat-row" data-cat-id="${escapeHtml(cat.id)}">
+            <div class="cat-row-main">
+              <div class="cat-row-left">
+                <div class="cat-order-btns">
+                  <button type="button" class="btn-icon" title="Sposta su" aria-label="Sposta su ${escapeHtml(cat.name)}" ${idx === 0 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""} onclick="moveCat('${escapeHtml(cat.id)}', -1)">↑</button>
+                  <button type="button" class="btn-icon" title="Sposta giù" aria-label="Sposta giù ${escapeHtml(cat.name)}" ${idx === categories.length - 1 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""} onclick="moveCat('${escapeHtml(cat.id)}', 1)">↓</button>
+                </div>
+                <div class="cat-name-block">
+                  <strong>${escapeHtml(cat.name)}</strong>
+                  <small>Posizione #${idx + 1}${cat.id !== cat.name ? ` · codice: ${escapeHtml(cat.id)}` : ""}</small>
+                </div>
+              </div>
+              <div class="cat-row-actions">
+                <span class="cat-count-badge">${count} ${count === 1 ? "articolo" : "articoli"}</span>
+                <button type="button" class="btn-icon" title="Rinomina" aria-label="Rinomina ${escapeHtml(cat.name)}" onclick="startRenameCategory('${escapeHtml(cat.id)}')">✏️</button>
+                <button type="button" class="btn-icon del" title="Elimina" aria-label="Elimina categoria ${escapeHtml(cat.name)}" ${categories.length <= 1 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""} onclick="startDeleteCategory('${escapeHtml(cat.id)}')">🗑️</button>
+              </div>
+            </div>
+            ${inlinePanel}
+          </div>
+        `;
+      }).join("");
+
+      preview.innerHTML = [
+        `<span class="cat-preview-pill active">Tutti</span>`,
+        ...categories.map(c => `<span class="cat-preview-pill">${escapeHtml(c.name)}</span>`)
+      ].join("");
+
+      document.getElementById("tabCatCount").textContent = categories.length;
+    }
+
+    function showCatFormError(msg) {
+      const el = document.getElementById("catFormError");
+      if (!el) return;
+      if (msg) {
+        el.textContent = msg;
+        el.style.display = "block";
+      } else {
+        el.textContent = "";
+        el.style.display = "none";
+      }
+    }
+
+    function handleAddCategory(e) {
+      e.preventDefault();
+      const input = document.getElementById("newCatName");
+      const res = CatalogLogic.addCategory(categories, input.value);
+      if (!res.ok) {
+        showCatFormError(res.error);
+        input.focus();
+        return;
+      }
+      showCatFormError("");
+      categories = res.categories;
+      persistCategoriesOnly();
+      input.value = "";
+      renderCategoryControls();
+      renderCategoriesManager();
+      showToast(`Categoria "${res.category.name}" aggiunta!`);
+    }
+
+    function startRenameCategory(id) {
+      renamingCatId = id;
+      deletingCatId = null;
+      renderCategoriesManager();
+      setTimeout(() => document.getElementById("renameCatInput")?.focus(), 20);
+    }
+
+    function cancelCategoryAction() {
+      renamingCatId = null;
+      deletingCatId = null;
+      renderCategoriesManager();
+    }
+
+    function confirmRenameCategory(id) {
+      const input = document.getElementById("renameCatInput");
+      const errEl = document.getElementById("renameCatError");
+      const res = CatalogLogic.renameCategory(categories, products, id, input?.value || "");
+      if (!res.ok) {
+        if (errEl) {
+          errEl.textContent = res.error;
+          errEl.style.display = "block";
+        }
+        return;
+      }
+      categories = res.categories;
+      products = res.products;
+      if (selectedCategory === id) selectedCategory = res.category.id;
+      renamingCatId = null;
+      persist();
+      renderCategoryControls();
+      renderTable();
+      renderCategoriesManager();
+      showToast(`Categoria rinominata in "${res.category.name}"!`);
+    }
+
+    function moveCat(id, direction) {
+      categories = CatalogLogic.moveCategory(categories, id, direction);
+      persistCategoriesOnly();
+      renderCategoryControls();
+      renderCategoriesManager();
+      showToast("Ordine categorie aggiornato!");
+    }
+
+    function startDeleteCategory(id) {
+      if (categories.length <= 1) {
+        showToast("Deve rimanere almeno una categoria.");
+        return;
+      }
+      deletingCatId = id;
+      renamingCatId = null;
+      renderCategoriesManager();
+    }
+
+    function confirmDeleteCategory(id) {
+      const reassignSel = document.getElementById("reassignCatSelect");
+      const reassignToId = reassignSel ? reassignSel.value : null;
+      const res = CatalogLogic.deleteCategory(categories, products, id, reassignToId);
+      if (!res.ok) {
+        showToast(res.error);
+        return;
+      }
+      categories = res.categories;
+      products = res.products;
+      if (selectedCategory === id) selectedCategory = "tutti";
+      deletingCatId = null;
+      persist();
+      renderCategoryControls();
+      renderTable();
+      renderCategoriesManager();
+      showToast("Categoria eliminata!");
+    }
+
+    function promptResetCategories() {
+      document.getElementById("resetCatsConfirm").style.display = "flex";
+    }
+
+    function cancelResetCategories() {
+      document.getElementById("resetCatsConfirm").style.display = "none";
+    }
+
+    function confirmResetCategories() {
+      categories = CatalogLogic.mergeCategoriesFromProducts(CatalogLogic.DEFAULT_CATEGORIES, products);
+      persistCategoriesOnly();
+      document.getElementById("resetCatsConfirm").style.display = "none";
+      renderCategoryControls();
+      renderCategoriesManager();
+      showToast("Categorie predefinite ripristinate!");
+    }
+
     // Backup & Restore
     function exportJSON() {
-      const blob = new Blob([JSON.stringify(products, null, 2)], { type: "application/json" });
+      const payload = { version: 2, categories, products };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = `berlingieri_catalogo_${new Date().toISOString().split('T')[0]}.json`;
@@ -1163,15 +1672,22 @@
           const parsed = JSON.parse(e.target.result);
           if (Array.isArray(parsed)) {
             products = parsed;
-            persist();
-            initNewProduct();
-            renderTable();
-            showToast("Catalogo ripristinato con successo!");
+            categories = CatalogLogic.mergeCategoriesFromProducts(categories, products);
+          } else if (parsed && Array.isArray(parsed.products)) {
+            products = parsed.products;
+            categories = CatalogLogic.mergeCategoriesFromProducts(parsed.categories, products);
           } else {
-            alert("File non valido.");
+            showToast("File non valido.");
+            return;
           }
+          persist();
+          initNewProduct();
+          renderCategoryControls();
+          renderTable();
+          renderCategoriesManager();
+          showToast("Catalogo ripristinato con successo!");
         } catch(err) {
-          alert("Errore nella lettura del file JSON.");
+          showToast("Errore nella lettura del file JSON.");
         }
       };
       reader.readAsText(file);
@@ -1184,6 +1700,12 @@
       t.classList.add("show");
       setTimeout(() => t.classList.remove("show"), 2800);
     }
+
+    window.addEventListener("storage", e => {
+      if (e.key === STORAGE_KEY || e.key === CATEGORIES_STORAGE_KEY) {
+        init();
+      }
+    });
 
     window.onload = init;
   </script>

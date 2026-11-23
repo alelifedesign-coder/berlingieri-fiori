@@ -1,4 +1,5 @@
-const puppeteer = require('./node_modules/puppeteer');
+// const puppeteer = require('./node_modules/puppeteer'); // Stripped for AI Studio compatibility
+const puppeteer = null;
 const path = require('path');
 const fs = require('fs');
 
