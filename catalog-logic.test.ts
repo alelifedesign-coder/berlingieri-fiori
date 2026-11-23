@@ -3,24 +3,29 @@ import assert from 'node:assert/strict';
 import CatalogLogic from './catalog-logic.js';
 
 const {
+  CATEGORY_DEFAULT_IMAGES,
   DEFAULT_CATEGORIES,
   DEFAULT_PRODUCTS,
   normalizeCategories,
+  hydrateDefaultImages,
+  resolveProductImage,
   mergeCategoriesFromProducts,
   getCategoryLabel,
   countProductsByCategory,
   addCategory,
   renameCategory,
+  setCategoryImage,
   moveCategory,
   deleteCategory,
   filterProducts
 } = CatalogLogic;
 
-test('normalizeCategories returns default categories when empty or invalid', () => {
+test('normalizeCategories returns default categories with photos when empty or invalid', () => {
   const cats = normalizeCategories(null);
   assert.equal(cats.length, DEFAULT_CATEGORIES.length);
   assert.equal(cats[3].id, 'Alberi');
   assert.equal(cats[3].name, 'Alberi & Rami');
+  assert.equal(cats[0].img, CATEGORY_DEFAULT_IMAGES.Ghirlande);
 });
 
 test('addCategory validates empty, reserved, duplicate, and adds valid category', () => {
@@ -32,16 +37,30 @@ test('addCategory validates empty, reserved, duplicate, and adds valid category'
   const res = addCategory(DEFAULT_CATEGORIES, '  Segnaposto  Natalizi ');
   assert.equal(res.ok, true);
   assert.equal(res.categories.length, DEFAULT_CATEGORIES.length + 1);
-  assert.deepEqual(res.category, { id: 'Segnaposto Natalizi', name: 'Segnaposto Natalizi' });
+  assert.deepEqual(res.category, { id: 'Segnaposto Natalizi', name: 'Segnaposto Natalizi', img: null });
 });
 
-test('renameCategory updates category name and migrates matching products', () => {
+test('renameCategory updates category name, preserves image, and migrates matching products', () => {
   const res = renameCategory(DEFAULT_CATEGORIES, DEFAULT_PRODUCTS, 'Alberi', 'Alberi Decorati');
   assert.equal(res.ok, true);
   assert.equal(res.updatedProductsCount, 1);
   const migrated = res.products.find(p => p.id === 6);
   assert.equal(migrated.cat, 'Alberi Decorati');
   assert.equal(getCategoryLabel(res.categories, 'Alberi Decorati'), 'Alberi Decorati');
+  assert.equal(res.category.img, CATEGORY_DEFAULT_IMAGES.Alberi);
+  assert.equal(resolveProductImage({ id: 99, cat: 'Alberi Decorati', img: null }, res.categories), CATEGORY_DEFAULT_IMAGES.Alberi);
+});
+
+test('hydrateDefaultImages fills legacy null images and resolveProductImage respects imgRemoved', () => {
+  const legacyProducts = [{ id: 1, name: 'Test', cat: 'Ghirlande', img: null }];
+  const hydrated = hydrateDefaultImages(null, legacyProducts);
+  assert.equal(hydrated.products[0].img, CATEGORY_DEFAULT_IMAGES.Ghirlande);
+
+  const removedProd = { id: 2, name: 'NoImg', cat: 'Ghirlande', img: null, imgRemoved: true };
+  assert.equal(resolveProductImage(removedProd, DEFAULT_CATEGORIES), null);
+
+  const customCats = setCategoryImage(DEFAULT_CATEGORIES, 'Bouquet', 'data:image/jpeg;base64,abc');
+  assert.equal(resolveProductImage({ id: 3, cat: 'Bouquet', img: null }, customCats), 'data:image/jpeg;base64,abc');
 });
 
 test('renameCategory rejects collisions with another category', () => {

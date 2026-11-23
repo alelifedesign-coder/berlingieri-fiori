@@ -11,59 +11,76 @@
     CART: 'bf_cart_2026'
   };
 
+  const CATEGORY_DEFAULT_IMAGES = {
+    Ghirlande: 'src/assets/images/cat_ghirlande_1795446321516.jpg',
+    Centrotavola: 'src/assets/images/cat_centrotavola_1795446322172.jpg',
+    Bouquet: 'src/assets/images/cat_bouquet_1795446321436.jpg',
+    Alberi: 'src/assets/images/cat_alberi_1795446319699.jpg',
+    Composizioni: 'src/assets/images/cat_composizioni_1795446322081.jpg'
+  };
+
   const DEFAULT_CATEGORIES = [
-    { id: 'Ghirlande', name: 'Ghirlande' },
-    { id: 'Centrotavola', name: 'Centrotavola' },
-    { id: 'Bouquet', name: 'Bouquet' },
-    { id: 'Alberi', name: 'Alberi & Rami' },
-    { id: 'Composizioni', name: 'Composizioni' }
+    { id: 'Ghirlande', name: 'Ghirlande', img: CATEGORY_DEFAULT_IMAGES.Ghirlande },
+    { id: 'Centrotavola', name: 'Centrotavola', img: CATEGORY_DEFAULT_IMAGES.Centrotavola },
+    { id: 'Bouquet', name: 'Bouquet', img: CATEGORY_DEFAULT_IMAGES.Bouquet },
+    { id: 'Alberi', name: 'Alberi & Rami', img: CATEGORY_DEFAULT_IMAGES.Alberi },
+    { id: 'Composizioni', name: 'Composizioni', img: CATEGORY_DEFAULT_IMAGES.Composizioni }
   ];
 
   const DEFAULT_PRODUCTS = [
     {
       id: 1, name: 'Ghirlanda Classica Rossa', cat: 'Ghirlande', tag: 'BESTSELLER',
       desc: 'Ghirlanda in pino fresco con bacche rosse, pigne dorate e nastro in velluto. Diametro ø 40 cm.',
-      price: '€ 45', oldPrice: '€ 55', rating: '4.9', emoji: '🎄', status: 'available', img: null, tone: 'tone-1'
+      price: '€ 45', oldPrice: '€ 55', rating: '4.9', emoji: '🎄', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Ghirlande, tone: 'tone-1'
     },
     {
       id: 2, name: 'Centrotavola Natalizio Gold', cat: 'Centrotavola', tag: 'IDEA REGALO',
       desc: 'Composizione con rami di abete, cinnamomo, stelle di natale bianche e candela profumata.',
-      price: '€ 38', oldPrice: '€ 48', rating: '4.8', emoji: '🕯️', status: 'available', img: null, tone: 'tone-3'
+      price: '€ 38', oldPrice: '€ 48', rating: '4.8', emoji: '🕯️', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Centrotavola, tone: 'tone-3'
     },
     {
       id: 3, name: 'Bouquet Rosso & Bianco', cat: 'Bouquet', tag: 'PREFERITO',
       desc: 'Bouquet invernale con amarilli rossi, rami di bacche bianche e foglie di agrifoglio. Su ordinazione.',
-      price: '€ 55', oldPrice: '€ 68', rating: '4.9', emoji: '🌹', status: 'available', img: null, tone: 'tone-2'
+      price: '€ 55', oldPrice: '€ 68', rating: '4.9', emoji: '🌹', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Bouquet, tone: 'tone-2'
     },
     {
       id: 4, name: 'Ghirlanda Moderna Minimal', cat: 'Ghirlande', tag: 'NOVITÀ',
       desc: 'Ghirlanda boho con cotone essiccato, eucalipto, pigne naturali e fiocco in juta. Ø 35 cm.',
-      price: '€ 40', oldPrice: '€ 50', rating: '4.7', emoji: '🌿', status: 'available', img: null, tone: 'tone-1'
+      price: '€ 40', oldPrice: '€ 50', rating: '4.7', emoji: '🌿', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Ghirlande, tone: 'tone-1'
     },
     {
       id: 5, name: 'Composizione Candela Natale', cat: 'Composizioni', tag: 'IDEA REGALO',
       desc: 'Base in muschio con tre candele avvolte in abete, agrifoglio e rametti di eucalipto.',
-      price: '€ 32', oldPrice: '€ 42', rating: '4.8', emoji: '🕯️', status: 'limited', img: null, tone: 'tone-3'
+      price: '€ 32', oldPrice: '€ 42', rating: '4.8', emoji: '🕯️', status: 'limited',
+      img: CATEGORY_DEFAULT_IMAGES.Composizioni, tone: 'tone-3'
     },
     {
       id: 6, name: 'Ramo di Abete Decorato', cat: 'Alberi', tag: 'BESTSELLER',
       desc: 'Ramo singolo di abete naturale decorato con luci led, palline e nastri. Altezza 80 cm.',
-      price: '€ 28', oldPrice: '€ 35', rating: '4.9', emoji: '🌲', status: 'available', img: null, tone: 'tone-1'
+      price: '€ 28', oldPrice: '€ 35', rating: '4.9', emoji: '🌲', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Alberi, tone: 'tone-1'
     },
     {
       id: 7, name: 'Stella di Natale XXL', cat: 'Composizioni', tag: 'NOVITÀ',
       desc: 'Stella di natale in grande formato (ø 25 cm) avvolta in carta kraft decorata con nastro dorato.',
-      price: '€ 22', oldPrice: '€ 28', rating: '4.8', emoji: '🌺', status: 'available', img: null, tone: 'tone-2'
+      price: '€ 22', oldPrice: '€ 28', rating: '4.8', emoji: '🌺', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Composizioni, tone: 'tone-2'
     },
     {
       id: 8, name: 'Centrotavola Rustico', cat: 'Centrotavola', tag: 'PREFERITO',
       desc: 'Base di tronchetto con muschio, pigne, stelle di anice, cannella e fiori secchi.',
-      price: '€ 35', oldPrice: '€ 45', rating: '4.9', emoji: '🍂', status: 'available', img: null, tone: 'tone-3'
+      price: '€ 35', oldPrice: '€ 45', rating: '4.9', emoji: '🍂', status: 'available',
+      img: CATEGORY_DEFAULT_IMAGES.Centrotavola, tone: 'tone-3'
     },
     {
       id: 9, name: 'Ghirlanda Secca & Profumata', cat: 'Ghirlande', tag: 'ESAURITO',
       desc: 'Ghirlanda di fiori secchi, lavanda, anice, cannella e agrumi essiccati. Ø 30 cm.',
-      price: '€ 36', oldPrice: '€ 44', rating: '4.7', emoji: '🌸', status: 'sold', img: null, tone: 'tone-2'
+      price: '€ 36', oldPrice: '€ 44', rating: '4.7', emoji: '🌸', status: 'sold',
+      img: CATEGORY_DEFAULT_IMAGES.Ghirlande, tone: 'tone-2'
     }
   ];
 
@@ -83,20 +100,57 @@
       var item = raw[i];
       var id = '';
       var name = '';
+      var img = null;
       if (typeof item === 'string') {
         id = item.trim();
         name = id;
       } else if (item && typeof item === 'object') {
         id = String(item.id || item.name || '').trim();
         name = String(item.name || item.id || '').trim();
+        img = item.img || null;
       }
       if (!id || !name) continue;
       var key = id.toLowerCase();
       if (key === 'tutti' || seen.has(key)) continue;
       seen.add(key);
-      result.push({ id: id, name: name });
+      if (!img && Object.prototype.hasOwnProperty.call(CATEGORY_DEFAULT_IMAGES, id)) {
+        img = CATEGORY_DEFAULT_IMAGES[id];
+      }
+      result.push({ id: id, name: name, img: img });
     }
     return result.length ? result : cloneDefaults(DEFAULT_CATEGORIES);
+  }
+
+  function hydrateDefaultImages(categories, products) {
+    var nextCats = normalizeCategories(categories);
+    var prods = Array.isArray(products) ? products : [];
+    var nextProds = prods.map(function (p) {
+      if (!p || p.img || p.imgRemoved) return p;
+      var fallback = CATEGORY_DEFAULT_IMAGES[p.cat] || null;
+      if (!fallback) {
+        for (var i = 0; i < nextCats.length; i++) {
+          if (nextCats[i].id === p.cat && nextCats[i].img) {
+            fallback = nextCats[i].img;
+            break;
+          }
+        }
+      }
+      return fallback ? Object.assign({}, p, { img: fallback }) : p;
+    });
+    return { categories: nextCats, products: nextProds };
+  }
+
+  function resolveProductImage(product, categories) {
+    if (!product) return null;
+    if (product.img) return product.img;
+    if (product.imgRemoved) return null;
+    var list = normalizeCategories(categories);
+    for (var i = 0; i < list.length; i++) {
+      if ((list[i].id === product.cat || list[i].name === product.cat) && list[i].img) {
+        return list[i].img;
+      }
+    }
+    return CATEGORY_DEFAULT_IMAGES[product.cat] || null;
   }
 
   function mergeCategoriesFromProducts(categories, products) {
@@ -112,7 +166,7 @@
       if (lower === 'tutti' || seenIds.has(lower) || seenNames.has(lower)) continue;
       seenIds.add(lower);
       seenNames.add(lower);
-      list.push({ id: cat, name: cat });
+      list.push({ id: cat, name: cat, img: CATEGORY_DEFAULT_IMAGES[cat] || null });
     }
     return list;
   }
@@ -170,7 +224,7 @@
         return { ok: false, error: 'Esiste già una categoria con questo nome.' };
       }
     }
-    var newCat = { id: name, name: name };
+    var newCat = { id: name, name: name, img: null };
     return {
       ok: true,
       category: newCat,
@@ -205,8 +259,9 @@
     }
     var oldCat = list[targetIdx];
     var newId = newName;
+    var preservedImg = oldCat.img || null;
     var nextCategories = list.map(function (c, idx) {
-      return idx === targetIdx ? { id: newId, name: newName } : c;
+      return idx === targetIdx ? { id: newId, name: newName, img: preservedImg } : c;
     });
     var updatedProductsCount = 0;
     var nextProducts = prods.map(function (p) {
@@ -220,9 +275,16 @@
       ok: true,
       categories: nextCategories,
       products: nextProducts,
-      category: { id: newId, name: newName },
+      category: { id: newId, name: newName, img: preservedImg },
       updatedProductsCount: updatedProductsCount
     };
+  }
+
+  function setCategoryImage(categories, targetId, imgData) {
+    var list = normalizeCategories(categories);
+    return list.map(function (c) {
+      return c.id === targetId ? Object.assign({}, c, { img: imgData || null }) : c;
+    });
   }
 
   function moveCategory(categories, targetId, direction) {
@@ -305,14 +367,18 @@
 
   return {
     STORAGE_KEYS: STORAGE_KEYS,
+    CATEGORY_DEFAULT_IMAGES: CATEGORY_DEFAULT_IMAGES,
     DEFAULT_CATEGORIES: DEFAULT_CATEGORIES,
     DEFAULT_PRODUCTS: DEFAULT_PRODUCTS,
     normalizeCategories: normalizeCategories,
+    hydrateDefaultImages: hydrateDefaultImages,
+    resolveProductImage: resolveProductImage,
     mergeCategoriesFromProducts: mergeCategoriesFromProducts,
     getCategoryLabel: getCategoryLabel,
     countProductsByCategory: countProductsByCategory,
     addCategory: addCategory,
     renameCategory: renameCategory,
+    setCategoryImage: setCategoryImage,
     moveCategory: moveCategory,
     deleteCategory: deleteCategory,
     filterProducts: filterProducts

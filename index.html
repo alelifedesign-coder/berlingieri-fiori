@@ -121,10 +121,7 @@
 
     .product-body{padding:14px 4px 4px;display:flex;flex-direction:column;flex:1}
     .product-title{font-family:Georgia,serif;font-weight:700;font-size:17px;line-height:1.25;margin:0 0 4px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .product-cat{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500}
-    .product-rating{display:flex;align-items:center;gap:5px;margin-bottom:9px;font-size:12px}
-    .product-rating .stars{color:var(--gold);letter-spacing:1px;font-size:13px}
-    .product-rating .rating-val{color:var(--muted);font-weight:600;font-size:11.5px}
+    .product-cat{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:500}
 
     .product-pricing{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}
     .product-pricing .price{font-family:Georgia,serif;font-weight:800;color:var(--ink);font-size:18px}
@@ -710,7 +707,14 @@ function loadStateFromStorage() {
     try { rawCats = JSON.parse(storedCats); } catch (e) { rawCats = null; }
   }
   categories = CatalogLogic.mergeCategoriesFromProducts(rawCats, products);
-  if (!storedCats) {
+  if (!localStorage.getItem("bf_img_seed_v1")) {
+    const hydrated = CatalogLogic.hydrateDefaultImages(categories, products);
+    categories = hydrated.categories;
+    products = hydrated.products;
+    localStorage.setItem("bf_img_seed_v1", "1");
+    localStorage.setItem(CatalogLogic.STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+    localStorage.setItem(CatalogLogic.STORAGE_KEYS.CATEGORIES, JSON.stringify(categories));
+  } else if (!storedCats) {
     localStorage.setItem(CatalogLogic.STORAGE_KEYS.CATEGORIES, JSON.stringify(categories));
   }
 }
@@ -799,7 +803,6 @@ function renderProducts(filter) {
   }
 
   const defaultTags = ["BESTSELLER", "IDEA REGALO", "PREFERITO", "NOVITÀ"];
-  const defaultRatings = ["4.9", "4.8", "4.9", "4.7", "4.8", "4.9", "4.8", "4.9", "4.7"];
 
   grid.innerHTML = list.map((p, idx) => {
     const inCart = cart[p.id] || 0;
@@ -807,7 +810,6 @@ function renderProducts(filter) {
     const disabled = isSold ? "disabled" : "";
     const tagClass = isSold ? "sold" : "";
     const tagLabel = isSold ? "ESAURITO" : (p.tag || (p.status === "limited" ? "ULTIMI PEZZI" : defaultTags[idx % defaultTags.length]));
-    const ratingVal = p.rating || defaultRatings[idx % defaultRatings.length];
 
     let oldPriceHtml = "";
     if (p.oldPrice) {
@@ -820,8 +822,9 @@ function renderProducts(filter) {
       }
     }
 
-    const imgEl = p.img
-      ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
+    const resolvedImg = CatalogLogic.resolveProductImage(p, categories);
+    const imgEl = resolvedImg
+      ? `<img src="${resolvedImg}" alt="${escapeHtml(p.name)}" loading="lazy" referrerpolicy="no-referrer">`
       : `<span class="product-icon" aria-hidden="true">${p.emoji || "🌿"}</span>`;
 
     return `
@@ -834,10 +837,6 @@ function renderProducts(filter) {
       <div class="product-body">
         <h3 class="product-title" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
         <span class="product-cat">${escapeHtml(CatalogLogic.getCategoryLabel(categories, p.cat))}</span>
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-val">(${ratingVal})</span>
-        </div>
         <div class="product-pricing">
           <span class="price ${!p.price ? 'ask' : ''}">${p.price || "Su richiesta"}</span>
           ${oldPriceHtml}
@@ -921,7 +920,8 @@ function renderCartItems() {
   container.innerHTML = entries.map(([id, qty]) => {
     const p = products.find(x => x.id == id);
     if(!p) return "";
-    const thumb = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<span>${p.emoji || "🌿"}</span>`;
+    const resolvedImg = CatalogLogic.resolveProductImage(p, categories);
+    const thumb = resolvedImg ? `<img src="${resolvedImg}" alt="${escapeHtml(p.name)}" referrerpolicy="no-referrer">` : `<span>${p.emoji || "🌿"}</span>`;
     return `
     <div class="cart-item">
       <div class="cart-thumb">${thumb}</div>
@@ -956,8 +956,9 @@ function openLightbox(id) {
   const p = products.find(x => x.id === id);
   if(!p) return;
   const wrap = document.getElementById("lightboxImgWrap");
-  if(p.img) {
-    wrap.innerHTML = `<img src="${p.img}" alt="${p.name}">`;
+  const resolvedImg = CatalogLogic.resolveProductImage(p, categories);
+  if(resolvedImg) {
+    wrap.innerHTML = `<img src="${resolvedImg}" alt="${escapeHtml(p.name)}" referrerpolicy="no-referrer">`;
   } else {
     wrap.innerHTML = `<span class="lightbox-emoji">${p.emoji || "🌿"}</span>`;
   }
